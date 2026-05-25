@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchProducts } from "../api/products";
+import { fetchProducts } from "../../api/products";
 
 /**
  * Hook for fetching paginated products with AbortController.

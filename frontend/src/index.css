@@ -47,11 +47,49 @@ select {
   border: 1px solid #e5e5e5;
   border-radius: 12px;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform .2s, box-shadow .2s;
 }
 
-.product-card h2    { font-size: 15px; font-weight: 500; margin-bottom: .25rem; }
-.product-card .category { font-size: 12px; color: #888; margin-bottom: .5rem; }
-.product-card .price    { font-size: 18px; font-weight: 600; color: #2563eb; }
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.category-badge {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: .35rem .6rem;
+  border-radius: 6px;
+  margin-bottom: .8rem;
+  letter-spacing: .5px;
+}
+
+.product-card[data-category="shoes"] .category-badge { background: #fecaca; color: #991b1b; }
+.product-card[data-category="clothing"] .category-badge { background: #bfdbfe; color: #1e3a8a; }
+.product-card[data-category="accessories"] .category-badge { background: #fcd34d; color: #78350f; }
+.product-card[data-category="bags"] .category-badge { background: #d1d5db; color: #1f2937; }
+
+.product-card h2 { font-size: 15px; font-weight: 600; margin-bottom: .5rem; flex-grow: 1; }
+.product-card .product-description { font-size: 13px; color: #666; margin-bottom: 1rem; }
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+  padding-top: .5rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.price { font-size: 18px; font-weight: 700; color: #2563eb; }
+.stock { font-size: 12px; color: #666; }
+.stock.out-of-stock { color: #dc2626; font-weight: 600; }
 
 .pagination {
   display: flex;

@@ -3,7 +3,7 @@
  */
 export function ProductCard({ product }) {
     return (
-        <div className="product-card">
+        <div className="product-card" data-category={product.category}>
             <span className="category-badge">{product.category}</span>
             <h2 className="product-name">{product.name}</h2>
             <p className="product-description">{product.description}</p>

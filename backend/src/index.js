@@ -1,9 +1,13 @@
 const express = require("express");
 const cors = require("cors");
-const productRoutes = require("./routes/products.routes");
-const { connectDB, getDB, closeDB } = require('./config/db');
-const { errorHandler } = require("./middlewares/errorHandler");
 require("dotenv").config();
+
+const { connectDB, getDB, closeDB } = require('./config/db');
+const productRoutes = require("./routes/products.routes");
+const { errorHandler } = require("./middlewares/errorHandler");
+
+const swaggerUi       = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -15,9 +19,12 @@ app.use(express.json());
 // Routes
 app.use("/api/products", productRoutes);
 
+// Swagger Documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Health Check
-app.get("/api/health", (_req, res) =>{
-    res.json({status: "ok"});
+app.get("/api/health", (_req, res) => {
+    res.json({ status: "ok" });
 })
 
 // Error Handling

@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const productRoutes = require("./routes/products.routes");
 const { connectDB, getDB, closeDB } = require('./config/db');
+const { errorHandler } = require("./middlewares/errorHandler");
 require("dotenv").config();
 
 const app = express();
@@ -11,8 +12,16 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-// Toutes
+// Routes
 app.use("/api/products", productRoutes);
+
+// Health Check
+app.get("/api/health", (_req, res) =>{
+    res.json({status: "ok"});
+})
+
+// Error Handling
+app.use(errorHandler);
 
 async function start() {
     await connectDB();
